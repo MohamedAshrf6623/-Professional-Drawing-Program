@@ -201,10 +201,10 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     
     # Zoom buttons in a row
     zoom_in_rect = pygame.Rect(panel_x + 30, y_pos, 110, 35)
-    draw_button_3d(screen, zoom_in_rect, BTN_INFO, "➕ Zoom", font, False)
+    draw_button_3d(screen, zoom_in_rect, BTN_INFO, "➕ In", font, False)
     
     zoom_out_rect = pygame.Rect(panel_x + 160, y_pos, 110, 35)
-    draw_button_3d(screen, zoom_out_rect, BTN_WARNING, "➖ Zoom", font, False)
+    draw_button_3d(screen, zoom_out_rect, BTN_WARNING, "➖ Out", font, False)
     y_pos += 45
     
     # Reset Zoom button
@@ -213,25 +213,31 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     y_pos += 45
     
     # Calculate total content height and max scroll
-    panel_content_height = y_pos + panel_scroll_offset + 40  # Add padding at bottom
-    max_scroll = max(0, panel_content_height - height)
+    panel_content_height = y_pos + 40  # Add padding at bottom
+    current_max_scroll = max(0, panel_content_height - (height - 70))
+    
+    # Ensure panel_scroll_offset doesn't exceed max_scroll
+    if panel_scroll_offset > current_max_scroll:
+        panel_scroll_offset = current_max_scroll
     
     # Draw scrollbar if content is larger than panel
-    if panel_content_height > height:
+    if panel_content_height > (height - 70):
         # Scrollbar background
         scrollbar_x = panel_x + INPUT_PANEL_WIDTH - 15
         scrollbar_bg_rect = pygame.Rect(scrollbar_x, 70, 10, height - 70)
         pygame.draw.rect(screen, VERY_DARK_GRAY, scrollbar_bg_rect, border_radius=5)
         
         # Scrollbar handle
-        scroll_ratio = panel_scroll_offset / max_scroll if max_scroll > 0 else 0
-        visible_ratio = height / panel_content_height
+        scroll_ratio = panel_scroll_offset / current_max_scroll if current_max_scroll > 0 else 0
+        visible_ratio = (height - 70) / panel_content_height
         handle_height = max(30, int((height - 70) * visible_ratio))
         handle_y = 70 + int((height - 70 - handle_height) * scroll_ratio)
         
         handle_rect = pygame.Rect(scrollbar_x, handle_y, 10, handle_height)
         pygame.draw.rect(screen, ACCENT_BLUE, handle_rect, border_radius=5)
         pygame.draw.rect(screen, WHITE, handle_rect, 1, border_radius=5)
+    
+    return panel_scroll_offset
 
 
 def handle_panel_click(pos, canvas_width, height, current_tool, input_fields, 

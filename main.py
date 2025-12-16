@@ -212,7 +212,7 @@ def main():
                     mouse_pos = pygame.mouse.get_pos()
                     if mouse_pos[0] >= CANVAS_WIDTH:
                         # Scroll panel down
-                        panel_scroll_offset = min(max_scroll, panel_scroll_offset + 30)
+                        panel_scroll_offset = panel_scroll_offset + 30
                     else:
                         # Zoom out on canvas
                         zoom_level = max(zoom_level - ZOOM_STEP, MIN_ZOOM)
@@ -234,8 +234,8 @@ def main():
         for shape in shapes:
             shape.draw(screen, center_x, center_y, zoom_level)
         
-        # Draw input panel
-        draw_input_panel(screen, CANVAS_WIDTH, HEIGHT, current_tool, current_color,
+        # Draw input panel and update scroll offset
+        panel_scroll_offset = draw_input_panel(screen, CANVAS_WIDTH, HEIGHT, current_tool, current_color,
                         input_fields, active_field, zoom_level, shapes, panel_scroll_offset)
         
         pygame.display.flip()
