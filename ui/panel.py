@@ -57,8 +57,8 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     
     # Title with icon (fixed header)
     title_font = pygame.font.Font(None, FONT_LARGE)
-    title_text = title_font.render("⚙ CONTROL PANEL", True, WHITE)
-    title_shadow = title_font.render("⚙ CONTROL PANEL", True, BLACK)
+    title_text = title_font.render("CONTROL PANEL", True, WHITE)
+    title_shadow = title_font.render("CONTROL PANEL", True, BLACK)
     screen.blit(title_shadow, (panel_x + 22, 22))
     screen.blit(title_text, (panel_x + 20, 20))
     
@@ -74,12 +74,12 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     pygame.draw.rect(screen, SECTION_BG, section_rect, border_radius=10)
     pygame.draw.rect(screen, ACCENT_BLUE, section_rect, 2, border_radius=10)
     
-    tool_title = subtitle_font.render("🔧 SELECT TOOL", True, WHITE)
+    tool_title = subtitle_font.render("SELECT TOOL", True, WHITE)
     screen.blit(tool_title, (panel_x + 25, y_pos + 10))
     y_pos += 45
     
     # Tool buttons with icons
-    tools = [("⭕ Circle", "circle"), ("⬭ Ellipse", "ellipse"), ("📏 Line", "line")]
+    tools = [("Circle", "circle"), ("Ellipse", "ellipse"), ("Line", "line")]
     for tool_name, tool_key in tools:
         btn_rect = pygame.Rect(panel_x + 25, y_pos, 250, 32)
         if current_tool == tool_key:
@@ -95,7 +95,7 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     pygame.draw.rect(screen, SECTION_BG, section_rect, border_radius=10)
     pygame.draw.rect(screen, ACCENT_GREEN, section_rect, 2, border_radius=10)
     
-    color_title = subtitle_font.render("🎨 SELECT COLOR", True, WHITE)
+    color_title = subtitle_font.render("SELECT COLOR", True, WHITE)
     screen.blit(color_title, (panel_x + 25, y_pos + 10))
     y_pos += 45
     
@@ -131,7 +131,7 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     pygame.draw.rect(screen, SECTION_BG, section_rect, border_radius=10)
     pygame.draw.rect(screen, CYAN, section_rect, 2, border_radius=10)
     
-    input_title = subtitle_font.render("📝 ENTER VALUES", True, WHITE)
+    input_title = subtitle_font.render("ENTER VALUES", True, WHITE)
     screen.blit(input_title, (panel_x + 25, y_pos + 10))
     y_pos += 45
     
@@ -182,12 +182,12 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     # Action buttons section
     # Draw button
     draw_btn_rect = pygame.Rect(panel_x + 30, y_pos, 240, 45)
-    draw_button_3d(screen, draw_btn_rect, BTN_SUCCESS, "✓ DRAW SHAPE", title_font, False)
+    draw_button_3d(screen, draw_btn_rect, BTN_SUCCESS, "DRAW SHAPE", title_font, False)
     y_pos += 55
     
     # Clear button
     clear_btn_rect = pygame.Rect(panel_x + 30, y_pos, 240, 40)
-    draw_button_3d(screen, clear_btn_rect, BTN_DANGER, "🗑 Clear All", font, False)
+    draw_button_3d(screen, clear_btn_rect, BTN_DANGER, "Clear All", font, False)
     y_pos += 50
     
     # Zoom controls section
@@ -195,21 +195,21 @@ def draw_input_panel(screen, canvas_width, height, current_tool, current_color,
     pygame.draw.rect(screen, SECTION_BG, section_rect, border_radius=10)
     pygame.draw.rect(screen, ORANGE, section_rect, 2, border_radius=10)
     
-    zoom_title = subtitle_font.render("🔍 ZOOM CONTROLS", True, WHITE)
+    zoom_title = subtitle_font.render("ZOOM CONTROLS", True, WHITE)
     screen.blit(zoom_title, (panel_x + 25, y_pos + 10))
     y_pos += 45
     
     # Zoom buttons in a row
     zoom_in_rect = pygame.Rect(panel_x + 30, y_pos, 110, 35)
-    draw_button_3d(screen, zoom_in_rect, BTN_INFO, "➕ In", font, False)
+    draw_button_3d(screen, zoom_in_rect, BTN_INFO, "+ In", font, False)
     
     zoom_out_rect = pygame.Rect(panel_x + 160, y_pos, 110, 35)
-    draw_button_3d(screen, zoom_out_rect, BTN_WARNING, "➖ Out", font, False)
+    draw_button_3d(screen, zoom_out_rect, BTN_WARNING, "- Out", font, False)
     y_pos += 45
     
     # Reset Zoom button
     reset_zoom_rect = pygame.Rect(panel_x + 30, y_pos, 240, 32)
-    draw_button_3d(screen, reset_zoom_rect, BTN_SECONDARY, "↺ Reset (F5)", font, False)
+    draw_button_3d(screen, reset_zoom_rect, BTN_SECONDARY, "Reset (F5)", font, False)
     y_pos += 45
     
     # Calculate total content height and max scroll
