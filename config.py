@@ -69,3 +69,9 @@ PIXELS_PER_UNIT = 5  # 5 pixels = 1 coordinate unit
 LINE_WIDTH = 2
 POINT_RADIUS = 3
 POINT_SIZE = 4
+
+# Grid size
+X_MIN = -1000
+X_MAX =  1000
+Y_MIN = -1000
+Y_MAX =  1000

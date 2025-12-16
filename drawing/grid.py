@@ -7,7 +7,7 @@ from config import *
 def draw_grid(screen, canvas_width, center_x, center_y, height, zoom_level):
     """Draw Professional Grid and Axes"""
     tiny_font = pygame.font.Font(None, FONT_TINY)
-    quad_font = pygame.font.Font(None, 20)
+    quad_font = pygame.font.Font(None, FONT_SMALL)
     
     # Calculate grid spacing based on zoom
     grid_spacing = int(50 * zoom_level)
@@ -41,10 +41,24 @@ def draw_grid(screen, canvas_width, center_x, center_y, height, zoom_level):
         (canvas_width - 5 - arrow_size, center_y + arrow_size//2)
     ])
     
+    # Y-axis arrow (down)
+    pygame.draw.polygon(screen, AXIS_COLOR, [
+        (center_x, height - 5),                         # tip (down)
+        (center_x - arrow_size // 2, height - 5 - arrow_size),
+        (center_x + arrow_size // 2, height - 5 - arrow_size)
+    ])
+    # X-axis arrow (right)
+    pygame.draw.polygon(screen, AXIS_COLOR, [
+        (5, center_y),                                  # tip (left)
+        (5 + arrow_size, center_y - arrow_size // 2),
+        (5 + arrow_size, center_y + arrow_size // 2)
+    ])
+
     # Draw axis numbers with professional styling
     # X-axis numbers (horizontal) - Every 1 unit (but show every 5 units for clarity)
-    for i in range(-100, 101):
+    for i in range(X_MIN, X_MAX + 1):
         x_pos = center_x + int(i * PIXELS_PER_UNIT * zoom_level)
+        # Prevents drawing ticks Too close to edges
         if 20 < x_pos < canvas_width - 20:
             if i % 10 == 0 and i != 0:
                 # Major tick marks every 10 units
@@ -61,7 +75,7 @@ def draw_grid(screen, canvas_width, center_x, center_y, height, zoom_level):
                 pygame.draw.line(screen, GRID_COLOR, (x_pos, center_y - 2), (x_pos, center_y + 2), 1)
     
     # Y-axis numbers (vertical) - Every 1 unit (but show every 5 units for clarity)
-    for i in range(-100, 101):
+    for i in range(Y_MIN, Y_MAX + 1):
         y_pos = center_y - int(i * PIXELS_PER_UNIT * zoom_level)
         if 20 < y_pos < height - 20:
             if i % 10 == 0 and i != 0:
@@ -91,7 +105,7 @@ def draw_grid(screen, canvas_width, center_x, center_y, height, zoom_level):
     zoom_rect = pygame.Rect(canvas_width - 120, 10, 110, 30)
     draw_gradient_rect(screen, zoom_rect, PANEL_HEADER, SECTION_BG, vertical=False)
     pygame.draw.rect(screen, ACCENT_BLUE, zoom_rect, 2, border_radius=6)
-    zoom_text = small_font.render(f"🔍 {zoom_level:.1f}x", True, WHITE)
+    zoom_text = small_font.render(f" {zoom_level:.1f}x", True, WHITE)
     screen.blit(zoom_text, (canvas_width - 110, 18))
     
     # Draw quadrant labels
